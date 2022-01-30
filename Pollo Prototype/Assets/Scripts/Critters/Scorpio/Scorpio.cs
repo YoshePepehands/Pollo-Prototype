@@ -80,8 +80,16 @@ public class Scorpio : Critters
         }
         //print(force);
 
-        //UpdateAnimation();
-        UpdateRealAnimation();
+        if (anim != null)
+        {
+            UpdateAnimation();
+        }
+        else
+        {
+            UpdateProceduralAnimation();
+        }
+        
+        
     }
 
     private void FixedUpdate()
@@ -419,16 +427,8 @@ public class Scorpio : Critters
                 skitterCount--;
 
                 skitterDelay = 0.2f;
-                //if (skitterCount == 0)
-                //{
-                //    skitterDelay = 0.7f;
-                //}
-                //else
-                //{
-                //    skitterDelay = 0.2f;
-                //}
-
-                print("skittering");
+                
+                //print("skittering");
             }
             //Switch to pounce or firing state
             else
@@ -540,7 +540,7 @@ public class Scorpio : Critters
     }
 
     //Updates the player animation
-    private void UpdateAnimation()
+    private void UpdateProceduralAnimation()
     {
         ////Squash & Stretch
         //const float s1 = 0.2f;
@@ -583,7 +583,7 @@ public class Scorpio : Critters
     }
 
     //Updates the player animation
-    private void UpdateRealAnimation()
+    private void UpdateAnimation()
     {
         switch (scorpioState)
         {

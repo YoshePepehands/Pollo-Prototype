@@ -239,7 +239,7 @@ public class Libra : Critters
             lineRend.SetPosition(0, libraEyes.position);
             lineRend.SetPosition(1, hit.point);
             //Debug.DrawLine(libraEyes.position, hit.point, Color.red);
-            print("drawing a line");
+            //print("drawing a line");
         }
         
     }
