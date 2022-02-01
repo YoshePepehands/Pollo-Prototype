@@ -51,7 +51,7 @@ public class Scorpio : Critters
 
     private Animator anim;
 
-    [SerializeField] private GameObject projectilePrefab;
+    public GameObject projectilePrefab;
     private float projectileSpeed = 10f;
 
     void Start()
@@ -80,12 +80,15 @@ public class Scorpio : Critters
         }
         //print(force);
 
+        //Check if there is an animator
         if (anim != null)
         {
+            //Update sprite based animations
             UpdateAnimation();
         }
         else
         {
+            //Update procedural animations
             UpdateProceduralAnimation();
         }
         
@@ -540,49 +543,6 @@ public class Scorpio : Critters
     }
 
     //Updates the player animation
-    private void UpdateProceduralAnimation()
-    {
-        ////Squash & Stretch
-        //const float s1 = 0.2f;
-        //const float s2 = 0.2f;
-        //var v = new Vector2(
-        //    1 - acceleration.x * s1 + acceleration.y * s2
-        //  , 1 - acceleration.y * s2 + acceleration.x * s1);
-
-        ////Decay acceleration
-        //acceleration *= 0.9f;
-
-
-        //Rotate the object based on velocity x & y
-        float degRotation = rb.velocity.x * -rb.velocity.y;
-        degRotation = Mathf.Clamp(degRotation, -30, 30);
-
-        float lerpedRotation = Mathf.Lerp(transform.rotation.z, degRotation, 0.7f);
-        gameObject.transform.rotation = Quaternion.Euler(0, 0, lerpedRotation);
-
-
-
-        //Scale the object based on velocity y
-
-        float scaleX = 1;
-        float scaleY = 1;
-
-        if (isGrounded)
-        {
-            //Reset to normal cube
-            gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
-        else
-        {
-            scaleY = Mathf.Lerp(transform.localScale.y, 1 + Mathf.Abs(rb.velocity.y) * 0.1f, 0.3f);
-            scaleY = Mathf.Clamp(scaleY, 0.5f, 1.5f);
-            scaleX = 2 - scaleY;
-        }
-        scaleX = transform.localScale.x > 0 ? scaleX : -scaleX;
-        transform.localScale = new Vector3(scaleX, scaleY, transform.localScale.z);
-    }
-
-    //Updates the player animation
     private void UpdateAnimation()
     {
         switch (scorpioState)
@@ -631,6 +591,49 @@ public class Scorpio : Critters
             default:
                 break;
         }
+    }
+
+    //Updates the player animation
+    private void UpdateProceduralAnimation()
+    {
+        ////Squash & Stretch
+        //const float s1 = 0.2f;
+        //const float s2 = 0.2f;
+        //var v = new Vector2(
+        //    1 - acceleration.x * s1 + acceleration.y * s2
+        //  , 1 - acceleration.y * s2 + acceleration.x * s1);
+
+        ////Decay acceleration
+        //acceleration *= 0.9f;
+
+
+        //Rotate the object based on velocity x & y
+        float degRotation = rb.velocity.x * -rb.velocity.y;
+        degRotation = Mathf.Clamp(degRotation, -30, 30);
+
+        float lerpedRotation = Mathf.Lerp(transform.rotation.z, degRotation, 0.7f);
+        gameObject.transform.rotation = Quaternion.Euler(0, 0, lerpedRotation);
+
+
+
+        //Scale the object based on velocity y
+
+        float scaleX = 1;
+        float scaleY = 1;
+
+        if (isGrounded)
+        {
+            //Reset to normal cube
+            gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else
+        {
+            scaleY = Mathf.Lerp(transform.localScale.y, 1 + Mathf.Abs(rb.velocity.y) * 0.1f, 0.3f);
+            scaleY = Mathf.Clamp(scaleY, 0.5f, 1.5f);
+            scaleX = 2 - scaleY;
+        }
+        scaleX = transform.localScale.x > 0 ? scaleX : -scaleX;
+        transform.localScale = new Vector3(scaleX, scaleY, transform.localScale.z);
     }
 
     //Debug Gizmos

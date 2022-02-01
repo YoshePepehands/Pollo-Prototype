@@ -176,8 +176,8 @@ TextureImporter:
       name: Aries Idle Spritesheet_2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1024
+        x: 1024
+        y: 1536
         width: 512
         height: 512
       alignment: 0
@@ -197,8 +197,8 @@ TextureImporter:
       name: Aries Idle Spritesheet_3
       rect:
         serializedVersion: 2
-        x: 512
-        y: 1024
+        x: 1536
+        y: 1536
         width: 512
         height: 512
       alignment: 0
@@ -218,7 +218,7 @@ TextureImporter:
       name: Aries Idle Spritesheet_4
       rect:
         serializedVersion: 2
-        x: 1024
+        x: 0
         y: 1024
         width: 512
         height: 512
@@ -239,7 +239,7 @@ TextureImporter:
       name: Aries Idle Spritesheet_5
       rect:
         serializedVersion: 2
-        x: 1536
+        x: 512
         y: 1024
         width: 512
         height: 512
@@ -260,8 +260,8 @@ TextureImporter:
       name: Aries Idle Spritesheet_6
       rect:
         serializedVersion: 2
-        x: 0
-        y: 512
+        x: 1024
+        y: 1024
         width: 512
         height: 512
       alignment: 0
@@ -281,8 +281,8 @@ TextureImporter:
       name: Aries Idle Spritesheet_7
       rect:
         serializedVersion: 2
-        x: 512
-        y: 512
+        x: 1536
+        y: 1024
         width: 512
         height: 512
       alignment: 0
@@ -302,7 +302,7 @@ TextureImporter:
       name: Aries Idle Spritesheet_8
       rect:
         serializedVersion: 2
-        x: 1024
+        x: 0
         y: 512
         width: 512
         height: 512
@@ -323,7 +323,7 @@ TextureImporter:
       name: Aries Idle Spritesheet_9
       rect:
         serializedVersion: 2
-        x: 1536
+        x: 512
         y: 512
         width: 512
         height: 512
@@ -344,8 +344,8 @@ TextureImporter:
       name: Aries Idle Spritesheet_10
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 1024
+        y: 512
         width: 512
         height: 512
       alignment: 0
@@ -365,8 +365,8 @@ TextureImporter:
       name: Aries Idle Spritesheet_11
       rect:
         serializedVersion: 2
-        x: 512
-        y: 0
+        x: 1536
+        y: 512
         width: 512
         height: 512
       alignment: 0
@@ -386,7 +386,7 @@ TextureImporter:
       name: Aries Idle Spritesheet_12
       rect:
         serializedVersion: 2
-        x: 1024
+        x: 0
         y: 0
         width: 512
         height: 512
@@ -407,7 +407,7 @@ TextureImporter:
       name: Aries Idle Spritesheet_13
       rect:
         serializedVersion: 2
-        x: 1536
+        x: 512
         y: 0
         width: 512
         height: 512

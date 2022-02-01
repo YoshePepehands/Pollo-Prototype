@@ -1,7 +1,43 @@
 fileFormatVersion: 2
 guid: dc07708204a4b7c47a2aa3403c65cdea
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -5095943419794921978
+    second: Aries Hurt Spritesheet_0
+  - first:
+      213: 4004433288025281839
+    second: Aries Hurt Spritesheet_1
+  - first:
+      213: 5613620027480264899
+    second: Aries Hurt Spritesheet_2
+  - first:
+      213: 1210547551385218536
+    second: Aries Hurt Spritesheet_3
+  - first:
+      213: -6290404738774391537
+    second: Aries Hurt Spritesheet_4
+  - first:
+      213: 1156163609320892596
+    second: Aries Hurt Spritesheet_5
+  - first:
+      213: 94153825881443275
+    second: Aries Hurt Spritesheet_6
+  - first:
+      213: -1460632009910448941
+    second: Aries Hurt Spritesheet_7
+  - first:
+      213: 7484433413331176221
+    second: Aries Hurt Spritesheet_8
+  - first:
+      213: 6432752395089583448
+    second: Aries Hurt Spritesheet_9
+  - first:
+      213: -4182666025144039540
+    second: Aries Hurt Spritesheet_10
+  - first:
+      213: -1581330798862673763
+    second: Aries Hurt Spritesheet_11
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -32,7 +68,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 0
     aniso: -1
     mipBias: -100
     wrapU: 1
@@ -41,12 +77,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 256
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -66,7 +102,19 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -75,7 +123,49 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Aries Hurt Spritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60662ab85729749b0800000000000000
+      internalID: -5095943419794921978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aries Hurt Spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f251f7bebda929730800000000000000
+      internalID: 4004433288025281839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

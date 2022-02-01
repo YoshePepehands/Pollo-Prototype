@@ -32,7 +32,7 @@ public class PolloController : MonoBehaviour
     //Physics Variables
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public Vector2 force;
-    public float speed = 1600;
+    private float speed = 1600;
     private float slideSpeed = 6000;
     private float maxVelocity = 5f;
     private float maxSlideVelocity = 10f;
@@ -45,8 +45,8 @@ public class PolloController : MonoBehaviour
 
     //Animation Variables
     private BoxCollider2D boxCollider2D;
-    public Vector2 originalColliderOffset;
-    public Vector2 originalColliderSize;
+    private Vector2 originalColliderOffset;
+    private Vector2 originalColliderSize;
     private Animator anim;
 
     //Timer Variables
@@ -55,6 +55,8 @@ public class PolloController : MonoBehaviour
 
     //Prefab Variables
     public GameObject slidingSmokePrefab;
+
+    private PolloAbility polloAbility;
 
     void Start()
     {
@@ -71,6 +73,8 @@ public class PolloController : MonoBehaviour
         anim = GetComponent<Animator>();
 
         slideTimer = slideDuration;
+
+        polloAbility = GetComponent<PolloAbility>();
     }
 
     void Update()
@@ -128,11 +132,23 @@ public class PolloController : MonoBehaviour
 
         if (hit.collider != null)
         {
+            //Player is grounded
             physicalState = PhysicalState.GROUNDED;
             jumpCount = 1;
         }
         else
         {
+            //Check if slide off platform
+            if (playerState == PlayerState.SLIDE)
+            {
+                //Reset collider and offset
+                SlideCollider(false);
+
+                //Reset slide timer
+                slideTimer = slideDuration;
+            }
+
+            //Player is not grounded
             physicalState = PhysicalState.ONAIR;
         }
     }
@@ -214,10 +230,10 @@ public class PolloController : MonoBehaviour
         {
             if (horizontalForce != 0)
             {
-                if (Input.GetKeyDown(KeyCode.LeftShift))
+                if (Input.GetKeyDown(KeyCode.Z))
                 {
                     playerState = PlayerState.SLIDE;
-                    SpawnSlideSmokeVFX();
+                    SpawnSmokeVFX();
                 }
                 else
                 {
@@ -227,10 +243,10 @@ public class PolloController : MonoBehaviour
             }
             else if (Input.GetAxisRaw("Vertical") < 0)
             {
-                if (Input.GetKeyDown(KeyCode.LeftShift))
+                if (Input.GetKeyDown(KeyCode.Z))
                 {
                     playerState = PlayerState.SLIDE;
-                    SpawnSlideSmokeVFX();
+                    SpawnSmokeVFX();
                 }
                 else
                 {
@@ -271,39 +287,26 @@ public class PolloController : MonoBehaviour
     }
 
     //Adjust Sliding collider
-    private void SlideCollider(bool isSliding)
+    public void SlideCollider(bool isSliding)
     {
+        //Player is sliding
         if (isSliding)
         {
+            //Lower collider and offset
             boxCollider2D.offset = new Vector2(originalColliderOffset.x, -originalColliderSize.y / 4);
             boxCollider2D.size = new Vector2(originalColliderSize.x, originalColliderSize.y / 2);
         }
+        //Player is finished sliding
         else
         {
+            //Reset collider and offset
             boxCollider2D.offset = originalColliderOffset;
             boxCollider2D.size = originalColliderSize;
         }
     }
 
-    //Spawn Sliding smoke VFX
-    private void SpawnSlideSmokeVFX()
-    {
-        //Instantiate sliding smoke VFX
-        GameObject slidingSmokeClone = Instantiate(slidingSmokePrefab, getFeetPos(), Quaternion.identity);
-
-        //Change effect direction
-        if (transform.localScale.x < 0)
-        {
-            slidingSmokeClone.transform.localScale = new Vector3(-slidingSmokeClone.transform.localScale.x
-                , slidingSmokeClone.transform.localScale.y
-                , slidingSmokeClone.transform.localScale.z);
-        }
-
-        Destroy(slidingSmokeClone, 1f);
-    }
-
     //Check for roof overhead to end slide
-    private bool SlideHasRoof()
+    public bool SlideHasRoof()
     {
         //Cast a ray up to check if there is obstacle over head
         RaycastHit2D hit = Physics2D.Raycast(getFeetPos(), Vector2.up, originalColliderSize.y * transform.localScale.y, groundMask);
@@ -318,6 +321,23 @@ public class PolloController : MonoBehaviour
             //There is nothing over head
             return false;
         }
+    }
+
+    //Spawn Sliding smoke VFX
+    private void SpawnSmokeVFX()
+    {
+        //Instantiate sliding smoke VFX
+        GameObject slidingSmokeClone = Instantiate(slidingSmokePrefab, getFeetPos(), Quaternion.identity);
+
+        //Change effect direction
+        if (transform.localScale.x < 0)
+        {
+            slidingSmokeClone.transform.localScale = new Vector3(-slidingSmokeClone.transform.localScale.x
+                , slidingSmokeClone.transform.localScale.y
+                , slidingSmokeClone.transform.localScale.z);
+        }
+
+        Destroy(slidingSmokeClone, 1f);
     }
 
     //Player Jump Input
@@ -392,6 +412,7 @@ public class PolloController : MonoBehaviour
                 anim.SetInteger("animState", 5);
                 break;
             case PlayerState.MELEE:
+                anim.SetInteger("animState", 6);
                 break;
             case PlayerState.RANGED:
                 break;

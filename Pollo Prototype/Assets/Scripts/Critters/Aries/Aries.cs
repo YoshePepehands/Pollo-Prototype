@@ -10,9 +10,9 @@ public class Aries : Critters
         IDLE,
         ALERT,
         CHASE,
-        CHARGING,
-        FIRING,
-        TELEPORTING
+        ATTACKING,
+        VANISH,
+        TELEPORT
     }
     [SerializeField] private AriesState ariesState = AriesState.IDLE;
 
@@ -20,7 +20,7 @@ public class Aries : Critters
     private float alertTimer;
     private float alertDuration = 0.75f;
     private float chargeTimer;
-    private float chargeDuration = 1.5f;
+    private float chargeDuration = 1.083f;
     private float skillTimer;
     private float skillDuration = 5f;
 
@@ -33,9 +33,9 @@ public class Aries : Critters
     private LayerMask groundLayer;
     private float checkRadius = 2f;
 
-    //private Animator anim;
+    private Animator anim;
 
-    [SerializeField] private GameObject projectilePrefab;
+    public GameObject projectilePrefab;
     private float projectileSpeed = 10f;
 
     void Start()
@@ -48,12 +48,24 @@ public class Aries : Critters
         player = GameObject.FindWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();
         groundLayer = LayerMask.GetMask("Ground");
+        anim = GetComponent<Animator>();
     }
 
     void Update()
     {
         UpdateCritterLogic();
-        //UpdateAnimation();
+
+        //Check if there is an animator
+        if (anim != null)
+        {
+            //Update sprite based animations
+            UpdateAnimation();
+        }
+        else
+        {
+            //Update procedural animations
+            UpdateProceduralAnimation();
+        }
     }
 
     private void FixedUpdate()
@@ -142,14 +154,15 @@ public class Aries : Critters
                 if (skillTimer <= 0 && TargetWithinRange(player) == 2)
                 {
                     int attackSelection = Random.Range(0, 2);
-                    attackSelection = 0;
+                    attackSelection = 1;
                     if (attackSelection == 0)
                     {
-                        ariesState = AriesState.CHARGING;
+                        ariesState = AriesState.ATTACKING;
                     }
                     else if (attackSelection == 1)
                     {
-                        ariesState = AriesState.TELEPORTING;
+                        ariesState = AriesState.VANISH;
+                        rb.velocity = Vector2.zero;
                     }
 
                     //Reset skill timer
@@ -179,11 +192,16 @@ public class Aries : Critters
                 FacePlayer();
                 break;
 
-            case AriesState.CHARGING:
+            case AriesState.ATTACKING:
                 chargeTimer -= Time.deltaTime;
                 if (chargeTimer <= 0)
                 {
-                    ariesState = AriesState.FIRING;
+                    //Fire a projectile for tech demo without animator
+                    if (anim == null) ShootProjectile();
+
+                    //Continue hovering or chasing around the player
+                    //Dev note: will auto return to idle if player runs out of range
+                    ariesState = AriesState.CHASE;
                     chargeTimer = chargeDuration;
                 }
 
@@ -194,18 +212,12 @@ public class Aries : Critters
                 rb.velocity = Vector2.zero;
                 break;
 
-            case AriesState.FIRING:
-                //Fire a projectile
-                ShootProjectile();
-                
-                //Continue hovering or chasing around the player
-                //Dev note: will auto return to idle if player runs out of range
-                ariesState = AriesState.CHASE;
+            case AriesState.VANISH:
+                //Teleport using animation event
                 break;
 
-            case AriesState.TELEPORTING:
-                //Teleport
-                Teleport();
+            case AriesState.TELEPORT:
+                //Teleport using animation event
                 break;
             default:
                 break;
@@ -303,7 +315,17 @@ public class Aries : Critters
     //Teleport
     private void Teleport()
     {
-        
+        //Calculate where to go and teleport
+
+
+        //Change state to teleport to reappear
+        ariesState = AriesState.TELEPORT;
+    }
+
+    //End teleport
+    private void EndTeleport()
+    {
+        ariesState = AriesState.CHASE;
     }
 
     //Ground check
@@ -323,17 +345,30 @@ public class Aries : Critters
     //Updates the player animation
     private void UpdateAnimation()
     {
-        ////Squash & Stretch
-        //const float s1 = 0.2f;
-        //const float s2 = 0.2f;
-        //var v = new Vector2(
-        //    1 - acceleration.x * s1 + acceleration.y * s2
-        //  , 1 - acceleration.y * s2 + acceleration.x * s1);
+        switch (ariesState)
+        {
+            case AriesState.IDLE:
+            case AriesState.ALERT:
+            case AriesState.CHASE:
+                anim.SetInteger("animState", 0);
+                break;
+            case AriesState.ATTACKING:
+                anim.SetInteger("animState", 1);
+                break;
+            case AriesState.VANISH:
+                anim.SetInteger("animState", 2);
+                break;
+            case AriesState.TELEPORT:
+                anim.SetInteger("animState", 3);
+                break;
+            default:
+                break;
+        }
+    }
 
-        ////Decay acceleration
-        //acceleration *= 0.9f;
-
-
+    //Updates the player animation
+    private void UpdateProceduralAnimation()
+    {
         //Rotate the object based on velocity x & y
         float degRotation = rb.velocity.x * -rb.velocity.y;
         degRotation = Mathf.Clamp(degRotation, -30, 30);
