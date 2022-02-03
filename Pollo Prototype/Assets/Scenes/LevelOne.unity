@@ -1883,13 +1883,13 @@ GameObject:
   - component: {fileID: 842113015}
   - component: {fileID: 842113014}
   - component: {fileID: 842113019}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Aries
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &842113014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2006,7 +2006,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 842113013}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9, y: 2.5, z: 0}
+  m_LocalPosition: {x: -0.25, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4717,7 +4717,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1978397981}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10, y: 0, z: 0}
+  m_LocalPosition: {x: 10, y: 0.75, z: 0}
   m_LocalScale: {x: 6, y: 6, z: 1}
   m_Children: []
   m_Father: {fileID: 1203427387}
@@ -5029,7 +5029,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3945597272162339475, guid: 10d043e4ea4d06f4a8a7ebf7af80e6c0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9
+      value: -4.5
       objectReference: {fileID: 0}
     - target: {fileID: 3945597272162339475, guid: 10d043e4ea4d06f4a8a7ebf7af80e6c0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5077,7 +5077,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3945597272162339485, guid: 10d043e4ea4d06f4a8a7ebf7af80e6c0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10d043e4ea4d06f4a8a7ebf7af80e6c0, type: 3}

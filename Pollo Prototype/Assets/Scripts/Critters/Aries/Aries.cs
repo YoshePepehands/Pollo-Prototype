@@ -154,7 +154,7 @@ public class Aries : Critters
                 if (skillTimer <= 0 && TargetWithinRange(player) == 2)
                 {
                     int attackSelection = Random.Range(0, 2);
-                    attackSelection = 1;
+                    //attackSelection = 1; //Debug purposes
                     if (attackSelection == 0)
                     {
                         ariesState = AriesState.ATTACKING;

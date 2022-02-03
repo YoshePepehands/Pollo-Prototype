@@ -34,7 +34,7 @@ public class PolloAbility : MonoBehaviour
             timeToNextUse = 0;
 
             //Left mouse button down
-            if (Input.GetKeyDown(KeyCode.X))
+            if (Input.GetKeyDown(KeyCode.X) || Input.GetMouseButtonDown(0))
             {
                 //Check if player is not in the air, hurt, or dead
                 if (polloController.physicalState != PolloController.PhysicalState.ONAIR

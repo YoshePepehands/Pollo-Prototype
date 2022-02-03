@@ -37,7 +37,7 @@ public class PolloController : MonoBehaviour
     private float maxVelocity = 5f;
     private float maxSlideVelocity = 10f;
     private float feetOffset;
-    private float checkRadius = 0.2f;
+    private float checkRadius = 0.25f;
     private LayerMask groundMask;
     [HideInInspector] public float jumpForce;
     private float jumpDelay = 0.2f;
@@ -138,18 +138,15 @@ public class PolloController : MonoBehaviour
         }
         else
         {
-            //Check if slide off platform
-            if (playerState == PlayerState.SLIDE)
-            {
-                //Reset collider and offset
-                SlideCollider(false);
-
-                //Reset slide timer
-                slideTimer = slideDuration;
-            }
-
             //Player is not grounded
             physicalState = PhysicalState.ONAIR;
+
+            //Hotfix
+            //Reset collider and offset
+            SlideCollider(false);
+
+            //Reset slide timer
+            slideTimer = slideDuration;
         }
     }
 
@@ -230,10 +227,13 @@ public class PolloController : MonoBehaviour
         {
             if (horizontalForce != 0)
             {
-                if (Input.GetKeyDown(KeyCode.Z))
+                if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.LeftShift))
                 {
-                    playerState = PlayerState.SLIDE;
-                    SpawnSmokeVFX();
+                    if (playerState != PlayerState.JUMP && playerState != PlayerState.FALL)
+                    {
+                        playerState = PlayerState.SLIDE;
+                        SpawnSmokeVFX();
+                    }
                 }
                 else
                 {
@@ -243,7 +243,7 @@ public class PolloController : MonoBehaviour
             }
             else if (Input.GetAxisRaw("Vertical") < 0)
             {
-                if (Input.GetKeyDown(KeyCode.Z))
+                if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.LeftShift))
                 {
                     playerState = PlayerState.SLIDE;
                     SpawnSmokeVFX();
