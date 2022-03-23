@@ -21,7 +21,7 @@ public class Scorpio : Critters
 
     //State Timers
     private float idleTimer;
-    private float idleDuration = 3f;
+    private float idleDuration = 4f;
     private float patrolTimer;
     private float patrolDuration = 3f;
     private float alertTimer;

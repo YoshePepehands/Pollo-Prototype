@@ -98,7 +98,7 @@ public class Libra : Critters
                     alertTimer = alertDuration;
                 }
 
-                //Close eyes
+                //Open eyes
                 libraEyes.localScale = new Vector3(libraEyes.localScale.x, Mathf.Lerp(libraEyes.localScale.y, 1, Time.deltaTime * 5), libraEyes.localScale.z);
 
                 //Attempt to look at player
